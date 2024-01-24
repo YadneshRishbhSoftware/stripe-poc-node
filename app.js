@@ -2,9 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const stripe = require("stripe")(
-  "sk_test_51OZuSiSGavBO173f8EAndjHuio9MTBpdm2CZIVYg2bWawF9rVhZGXbBUtRXIBpntqRTbWbLTwTl8HURVCdubRo38001YtOUT3h"
-);
+const stripe = require("stripe")(process.env.stripe_key);
 
 app.use(express.json());
 app.use(cors());
@@ -32,7 +30,6 @@ app.post("/api/create-checkout-session", async (req, res) => {
     success_url: "http://localhost:3000/sucess",
     cancel_url: "http://localhost:3000/cancel",
   });
-console.log(session,"ddddddddddddddddd")
   res.json({ id: session.id });
 });
 
